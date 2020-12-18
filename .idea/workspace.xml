@@ -14,6 +14,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -63,10 +66,11 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="690" y="226" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608288322713" />
-    <state x="818" y="393" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1608288621035">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="614" y="327" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1608288843442">
+      <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="818" y="393" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608288621035" />
+    <state x="614" y="327" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.813@0.23.1440.813" timestamp="1608288843442" />
     <state x="746" y="291" key="FileChooserDialogImpl" timestamp="1608288077116">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
