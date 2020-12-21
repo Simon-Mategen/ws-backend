@@ -19,5 +19,13 @@ public class Storage
     {
         return list;
     }
-    
+
+    public void setLastUpdated(Date inDate){
+        inDate = lastUpdated;
+    }
+
+    public Date getLastUpdated(){
+        return lastUpdated;
+    }
+
 }

@@ -8,16 +8,22 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 import static spark.Spark.*;
 import com.google.gson.*;
 
 public class Main
 {
+    private static Storage storage = new Storage();
 
-    public void readFromRiksdagenAPI()
+    public ArrayList<Ledamot> readFromRiksdagenAPI()
     {
         HttpClient client = HttpClient.newHttpClient();
+        ArrayList<Ledamot> ledamots = new ArrayList<>();
 
         try
         {
@@ -34,13 +40,16 @@ public class Main
 
             JsonObject personlista = object.getAsJsonObject("personlista");
 
-            JsonArray person = personlista.getAsJsonArray("person");
+            JsonArray personArray = personlista.getAsJsonArray("person");
 
-            for (int i = 0; i < person.size(); i++)
+            for (int i = 0; i < personArray.size(); i++)
             {
-                JsonObject temp = (JsonObject) person.get(i);
 
-                System.out.println(temp.get("sorteringsnamn") + "\n" + temp.get("bild_url_192"));
+                JsonObject person = (JsonObject) personArray.get(i);
+
+                Ledamot ledamot = new Ledamot(i+1, (person.get("tilltalsnamn") + " " + person.get("efternamn")), person.get("parti").toString(), person.get("bild_url_192").toString());
+
+                ledamots.add(ledamot);
             }
 
         }
@@ -48,19 +57,42 @@ public class Main
         {
             System.out.println(e.getMessage());
         }
+
+        return ledamots;
     }
 
     public static void main(String[] args)
+
     {
-/*        get("/api/v1/ledamoter", ((request, response) ->
+        Main prog = new Main();
+        Gson gson = new Gson();
+
+        get("/api/v1/ledamoter", ((request, response) ->
         {
+            if(storage.getList() == null)
+            {
+                storage.addList(prog.readFromRiksdagenAPI());
+            }
+
+            ArrayList<Map> temp = new ArrayList<>();
+
+            for (Ledamot ledamot : storage.getList())
+            {
+                temp.add(ledamot.getAsMap());
+            }
+
+            response.type("application/json");
+            response.body(gson.toJson(temp));
 
 
             return response.body();
-        }));*/
+        }));
 
-        Main prog = new Main();
-        prog.readFromRiksdagenAPI();
+        get("/api/v1/ledamoter/:id", ((request, response) ->
+        {
+            return response.body();
+        }));
+
     }
 
 
