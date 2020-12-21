@@ -47,7 +47,7 @@ public class Main
 
                 JsonObject person = (JsonObject) personArray.get(i);
 
-                Ledamot ledamot = new Ledamot(i+1, (person.get("tilltalsnamn") + " " + person.get("efternamn")), person.get("parti").toString(), person.get("bild_url_192").toString());
+                Ledamot ledamot = new Ledamot(i, (person.get("tilltalsnamn") + " " + person.get("efternamn")), person.get("parti").toString(), person.get("bild_url_192").toString());
 
                 ledamots.add(ledamot);
             }
@@ -90,6 +90,18 @@ public class Main
 
         get("/api/v1/ledamoter/:id", ((request, response) ->
         {
+            if(storage.getList() == null)
+            {
+                storage.addList(prog.readFromRiksdagenAPI());
+            }
+
+            int chosenID = Integer.parseInt(request.params("id"));
+
+            Ledamot ledamot = storage.getLedamotAt(chosenID);
+
+            response.type("application/json");
+            response.body(gson.toJson(ledamot));
+
             return response.body();
         }));
 

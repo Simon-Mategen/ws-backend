@@ -28,4 +28,9 @@ public class Storage
         return lastUpdated;
     }
 
+    public Ledamot getLedamotAt(int index)
+    {
+        return list.get(index);
+    }
+
 }
