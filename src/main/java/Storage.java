@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Storage
 {
     private ArrayList<Ledamot> list;
+    private Date lastUpdated;
 
     public Storage()
     {
@@ -17,4 +19,5 @@ public class Storage
     {
         return list;
     }
+    
 }
