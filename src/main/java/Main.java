@@ -92,6 +92,49 @@ public class Main
         return partys;
     }
 
+    public ArrayList<Tweet> readTweetsFromAPI()
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        try
+        {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("https://api.twitter.com/1.1/search/tweets.json?q=Malm%C3%B6+university"))
+                    .header("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAKvUKQEAAAAAb3IZRryD44EeZps4n0fPZ3DI7qc%3DFo02KaSe9BOQ8gVA0bTwPkFFA5PNy3PIeW29mvxFKFRAJrCPHc")
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            String textResponse = response.body();
+
+            JsonParser parser = new JsonParser();
+            JsonObject object = parser.parse(textResponse).getAsJsonObject();
+
+            JsonArray array = object.getAsJsonArray("statuses");
+
+            JsonObject tweet1 = array.get(0).getAsJsonObject();
+            JsonObject tweet2 = array.get(1).getAsJsonObject();
+            JsonObject tweet3 = array.get(2).getAsJsonObject();
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private Tweet createTweet(JsonObject object)
+    {
+        //Texten
+        JsonPrimitive jText = object.getAsJsonPrimitive("text");
+        String text = jText.getAsString();
+        //Datumet
+        JsonPrimitive jDate = object.getAsJsonPrimitive("created_at");
+        String date = jDate.getAsString();
+        //Användare
+
+    }
+
     public static void main(String[] args)
 
     {
@@ -192,6 +235,21 @@ public class Main
 
             response.type("application/json");
             response.body(gson.toJson(link));
+
+            return response.body();
+        }));
+
+        get("/api/v1/tweet/:namn", ((request, response) ->
+        {
+            if(storage.getList() == null)
+            {
+                storage.addList(prog.readFromRiksdagenAPI());
+            }
+
+            String nameToSearch = request.params("namn");
+
+            response.type("application/json");
+            response.body(gson.toJson());
 
             return response.body();
         }));
