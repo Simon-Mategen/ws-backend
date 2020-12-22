@@ -42,12 +42,25 @@ public class Main
 
             JsonArray personArray = personlista.getAsJsonArray("person");
 
+
+
             for (int i = 0; i < personArray.size(); i++)
             {
-
                 JsonObject person = (JsonObject) personArray.get(i);
 
-                Ledamot ledamot = new Ledamot(i, (person.get("tilltalsnamn") + " " + person.get("efternamn")), person.get("parti").toString(), person.get("bild_url_192").toString());
+
+                JsonPrimitive firstNamePrim = person.getAsJsonPrimitive("tilltalsnamn");
+                JsonPrimitive lastNamePrim = person.getAsJsonPrimitive("efternamn");
+                String name = firstNamePrim.getAsString() + " " + lastNamePrim.getAsString();
+
+                JsonPrimitive partiPrim = person.getAsJsonPrimitive("parti");
+                String parti = partiPrim.getAsString();
+
+                JsonPrimitive bildPrim = person.getAsJsonPrimitive("bild_url_192");
+                String bild = bildPrim.getAsString();
+
+
+                Ledamot ledamot = new Ledamot(i, name, parti, bild);
 
                 ledamots.add(ledamot);
             }
@@ -60,6 +73,8 @@ public class Main
 
         return ledamots;
     }
+
+    
 
     public static void main(String[] args)
 
@@ -84,7 +99,6 @@ public class Main
             response.type("application/json");
             response.body(gson.toJson(temp));
 
-
             return response.body();
         }));
 
@@ -105,7 +119,32 @@ public class Main
             return response.body();
         }));
 
+        get("/api/v1/ledamoter/parti/:parti", ((request, response) ->
+        {
+            if(storage.getList() == null)
+            {
+                storage.addList(prog.readFromRiksdagenAPI());
+            }
+
+            String chosenParty = request.params("parti");
+
+            ArrayList<Map> tempList = new ArrayList<>();
+
+            for (int i = 0; i < storage.getSize(); i++)
+            {
+                Ledamot tempLedamot = storage.getLedamotAt(i);
+
+                if (tempLedamot.getParty().equals(chosenParty))
+                {
+                    tempList.add(tempLedamot.getAsMap());
+                }
+            }
+
+            response.type("application/json");
+            response.body(gson.toJson(tempList));
+
+            return response.body();
+        }));
+
     }
-
-
 }

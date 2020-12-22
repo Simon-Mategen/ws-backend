@@ -33,4 +33,9 @@ public class Storage
         return list.get(index);
     }
 
+    public int getSize()
+    {
+        return  list.size();
+    }
+
 }

@@ -41,6 +41,8 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -78,10 +80,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1608557707517">
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1608643138838">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608557707517" />
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608643138838" />
     <state x="690" y="226" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1608288322713">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -92,37 +94,37 @@
     <state x="614" y="337" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1440.900@0.0.1440.900" timestamp="1608561774016" />
     <state x="818" y="393" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608290074693" />
     <state x="614" y="327" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.813@0.23.1440.813" timestamp="1608288843442" />
-    <state x="746" y="291" key="FileChooserDialogImpl" timestamp="1608288077116">
+    <state x="746" y="291" key="FileChooserDialogImpl" timestamp="1608640953954">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="746" y="291" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608288077116" />
-    <state width="1877" height="130" key="GridCell.Tab.0.bottom" timestamp="1608564948442">
+    <state x="746" y="291" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608640953954" />
+    <state width="1877" height="160" key="GridCell.Tab.0.bottom" timestamp="1608644096882">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1398" height="193" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1608564023483" />
-    <state width="1877" height="130" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608564948442" />
-    <state width="1877" height="130" key="GridCell.Tab.0.center" timestamp="1608564948442">
+    <state width="1877" height="160" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608644096882" />
+    <state width="1877" height="160" key="GridCell.Tab.0.center" timestamp="1608644096882">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1398" height="193" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1608564023479" />
-    <state width="1877" height="130" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608564948442" />
-    <state width="1877" height="130" key="GridCell.Tab.0.left" timestamp="1608564948442">
+    <state width="1877" height="160" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608644096882" />
+    <state width="1877" height="160" key="GridCell.Tab.0.left" timestamp="1608644096882">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1398" height="193" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1608564023475" />
-    <state width="1877" height="130" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608564948442" />
-    <state width="1877" height="130" key="GridCell.Tab.0.right" timestamp="1608564948442">
+    <state width="1877" height="160" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608644096882" />
+    <state width="1877" height="160" key="GridCell.Tab.0.right" timestamp="1608644096882">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1398" height="193" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1608564023482" />
-    <state width="1877" height="130" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608564948442" />
-    <state x="440" y="99" key="SettingsEditor" timestamp="1608564944215">
+    <state width="1877" height="160" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608644096882" />
+    <state x="440" y="99" key="SettingsEditor" timestamp="1608640599836">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="440" y="99" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608564944215" />
-    <state x="371" y="166" key="new project wizard" timestamp="1608288286040">
+    <state x="440" y="99" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608640599836" />
+    <state x="371" y="166" key="new project wizard" timestamp="1608640954880">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="371" y="166" key="new project wizard/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608288286040" />
+    <state x="371" y="166" key="new project wizard/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608640954880" />
   </component>
 </project>

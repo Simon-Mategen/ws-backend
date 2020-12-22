@@ -26,4 +26,9 @@ public class Ledamot
 
         return map;
     }
+
+    public String getParty()
+    {
+        return party;
+    }
 }
