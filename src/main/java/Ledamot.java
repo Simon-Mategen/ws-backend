@@ -7,13 +7,15 @@ public class Ledamot
     private String name;
     private String party;
     private String pictureURL;
+    private String sourceID;
 
-    public Ledamot(int inId, String inName, String inParty, String inPictureURL )
+    public Ledamot(int inId, String inName, String inParty, String inPictureURL, String inSourceID)
     {
         this.id = inId;
         this.name = inName;
         this.party = inParty;
         this.pictureURL = inPictureURL;
+        this.sourceID = inSourceID;
     }
 
     public Map getAsMap()
@@ -30,5 +32,10 @@ public class Ledamot
     public String getParty()
     {
         return party;
+    }
+
+    public String getSourceID()
+    {
+        return sourceID;
     }
 }

@@ -43,11 +43,9 @@ public class Main
             JsonArray personArray = personlista.getAsJsonArray("person");
 
 
-
             for (int i = 0; i < personArray.size(); i++)
             {
                 JsonObject person = (JsonObject) personArray.get(i);
-
 
                 JsonPrimitive firstNamePrim = person.getAsJsonPrimitive("tilltalsnamn");
                 JsonPrimitive lastNamePrim = person.getAsJsonPrimitive("efternamn");
@@ -59,8 +57,11 @@ public class Main
                 JsonPrimitive bildPrim = person.getAsJsonPrimitive("bild_url_192");
                 String bild = bildPrim.getAsString();
 
+                JsonPrimitive sourceIDPrim = person.getAsJsonPrimitive("sourceid");
+                String sourceID = sourceIDPrim.getAsString();
 
-                Ledamot ledamot = new Ledamot(i, name, parti, bild);
+
+                Ledamot ledamot = new Ledamot(i, name, parti, bild, sourceID);
 
                 ledamots.add(ledamot);
             }
@@ -74,7 +75,22 @@ public class Main
         return ledamots;
     }
 
-    
+    public ArrayList<String> getAvailablePartys()
+    {
+        ArrayList<String> partys = new ArrayList<>();
+
+        for (int i = 0; i < storage.getSize(); i++)
+        {
+            Ledamot tempLedamot = storage.getLedamotAt(i);
+
+            if (!partys.contains(tempLedamot.getParty()) && !tempLedamot.getParty().equals("-"))
+            {
+                partys.add(tempLedamot.getParty());
+            }
+        }
+
+        return partys;
+    }
 
     public static void main(String[] args)
 
@@ -142,6 +158,40 @@ public class Main
 
             response.type("application/json");
             response.body(gson.toJson(tempList));
+
+            return response.body();
+        }));
+
+        get("/api/v1/partier", ((request, response) ->
+        {
+            if(storage.getList() == null)
+            {
+                storage.addList(prog.readFromRiksdagenAPI());
+            }
+
+            ArrayList<String> tempList = prog.getAvailablePartys();
+
+            response.type("application/json");
+            response.body(gson.toJson(tempList));
+
+            return response.body();
+        }));
+
+        get("/api/v1/link/:id", ((request, response) ->
+        {
+            if(storage.getList() == null)
+            {
+                storage.addList(prog.readFromRiksdagenAPI());
+            }
+
+            int choosenID = Integer.parseInt(request.params("id"));
+
+            Ledamot tempLedamot = storage.getLedamotAt(choosenID);
+
+            String link = "https://www.riksdagen.se/sv/ledamoter-partier/ledamot/filler-text_" + tempLedamot.getSourceID();
+
+            response.type("application/json");
+            response.body(gson.toJson(link));
 
             return response.body();
         }));
