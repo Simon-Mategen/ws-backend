@@ -92,14 +92,15 @@ public class Main
         return partys;
     }
 
-    public ArrayList<Tweet> readTweetsFromAPI()
+    public ArrayList<Tweet> readTweetsFromAPI(String name)
     {
         HttpClient client = HttpClient.newHttpClient();
+        ArrayList<Tweet> tweets = new ArrayList<>();
 
         try
         {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://api.twitter.com/1.1/search/tweets.json?q=Malm%C3%B6+university"))
+                    .uri(new URI("https://api.twitter.com/1.1/search/tweets.json?q=" + name))
                     .header("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAKvUKQEAAAAAb3IZRryD44EeZps4n0fPZ3DI7qc%3DFo02KaSe9BOQ8gVA0bTwPkFFA5PNy3PIeW29mvxFKFRAJrCPHc")
                     .build();
 
@@ -116,11 +117,17 @@ public class Main
             JsonObject tweet2 = array.get(1).getAsJsonObject();
             JsonObject tweet3 = array.get(2).getAsJsonObject();
 
+
+            tweets.add(createTweet(tweet1));
+            tweets.add(createTweet(tweet2));
+            tweets.add(createTweet(tweet3));
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Twitter read" + e.getMessage());
         }
+
+        return tweets;
     }
 
     private Tweet createTweet(JsonObject object)
@@ -132,7 +139,17 @@ public class Main
         JsonPrimitive jDate = object.getAsJsonPrimitive("created_at");
         String date = jDate.getAsString();
         //Användare
+        JsonObject jUser = object.getAsJsonObject("user");
+        JsonPrimitive jScreenName = jUser.getAsJsonPrimitive("screen_name");
+        String screenName = jScreenName.getAsString();
+        //URL
+        JsonPrimitive jID = object.getAsJsonPrimitive("id");
+        String id = jID.getAsString();
+        String url = "https://twitter.com/" + screenName + "/status/" + id;
 
+        Tweet tweet = new Tweet(text, screenName, url, date);
+
+        return tweet;
     }
 
     public static void main(String[] args)
@@ -248,8 +265,22 @@ public class Main
 
             String nameToSearch = request.params("namn");
 
-            response.type("application/json");
-            response.body(gson.toJson());
+            ArrayList<Tweet> temp = new ArrayList<>();
+
+            temp = prog.readTweetsFromAPI(nameToSearch);
+
+            if (temp.size() == 0)
+            {
+                response.status(404);
+                response.body("404: Tweets not found");
+            }
+            else
+            {
+                response.type("application/json");
+                response.body(gson.toJson(temp));
+            }
+
+
 
             return response.body();
         }));
