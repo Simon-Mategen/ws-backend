@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Storage
 {
     private ArrayList<Ledamot> list;
-    private Date lastUpdated;
+    private LocalDate date;
+    private LocalTime time;
 
     public Storage()
     {
@@ -20,12 +23,20 @@ public class Storage
         return list;
     }
 
-    public void setLastUpdated(Date inDate){
-        inDate = lastUpdated;
+    public void setLastUpdated(LocalDate inDate, LocalTime inTime)
+    {
+        date = inDate;
+        time = inTime;
     }
 
-    public Date getLastUpdated(){
-        return lastUpdated;
+    public LocalDate getDate()
+    {
+        return date;
+    }
+
+    public LocalTime getTime()
+    {
+        return time;
     }
 
     public Ledamot getLedamotAt(int index)

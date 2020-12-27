@@ -8,6 +8,9 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -152,6 +155,34 @@ public class Main
         return tweet;
     }
 
+    private void checkStorage()
+    {
+        if(storage.getList() == null)
+        {
+            updateStorage();
+        }
+        else
+        {
+            if (LocalDate.now().isAfter(storage.getDate()))
+            {
+                updateStorage();
+            }
+            else
+            {
+                if ((LocalTime.now().until(storage.getTime(), ChronoUnit.HOURS) >= 24))
+                {
+                    updateStorage();
+                }
+            }
+        }
+    }
+
+    private void updateStorage()
+    {
+        storage.addList(readFromRiksdagenAPI());
+        storage.setLastUpdated(LocalDate.now(), LocalTime.now());
+    }
+
     public static void main(String[] args)
 
     {
@@ -160,10 +191,8 @@ public class Main
 
         get("/api/v1/ledamoter", ((request, response) ->
         {
-            if(storage.getList() == null)
-            {
-                storage.addList(prog.readFromRiksdagenAPI());
-            }
+
+            prog.checkStorage();
 
             ArrayList<Map> temp = new ArrayList<>();
 
@@ -180,10 +209,7 @@ public class Main
 
         get("/api/v1/ledamoter/:id", ((request, response) ->
         {
-            if(storage.getList() == null)
-            {
-                storage.addList(prog.readFromRiksdagenAPI());
-            }
+            prog.checkStorage();
 
             int chosenID = Integer.parseInt(request.params("id"));
 
@@ -197,10 +223,7 @@ public class Main
 
         get("/api/v1/ledamoter/parti/:parti", ((request, response) ->
         {
-            if(storage.getList() == null)
-            {
-                storage.addList(prog.readFromRiksdagenAPI());
-            }
+            prog.checkStorage();
 
             String chosenParty = request.params("parti");
 
@@ -224,10 +247,7 @@ public class Main
 
         get("/api/v1/partier", ((request, response) ->
         {
-            if(storage.getList() == null)
-            {
-                storage.addList(prog.readFromRiksdagenAPI());
-            }
+            prog.checkStorage();
 
             ArrayList<String> tempList = prog.getAvailablePartys();
 
@@ -239,10 +259,7 @@ public class Main
 
         get("/api/v1/link/:id", ((request, response) ->
         {
-            if(storage.getList() == null)
-            {
-                storage.addList(prog.readFromRiksdagenAPI());
-            }
+            prog.checkStorage();
 
             int choosenID = Integer.parseInt(request.params("id"));
 
@@ -258,10 +275,6 @@ public class Main
 
         get("/api/v1/tweet/:namn", ((request, response) ->
         {
-            if(storage.getList() == null)
-            {
-                storage.addList(prog.readFromRiksdagenAPI());
-            }
 
             String nameToSearch = request.params("namn");
 
@@ -279,9 +292,6 @@ public class Main
                 response.type("application/json");
                 response.body(gson.toJson(temp));
             }
-
-
-
             return response.body();
         }));
 
