@@ -56,7 +56,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -69,5 +69,15 @@
       <updated>1608287996900</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="718" y="263" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1610115911689">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="718" y="263" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1610115911689" />
+    <state x="787" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1610116484999">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="787" y="172" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1610116484999" />
   </component>
 </project>

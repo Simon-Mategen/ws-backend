@@ -13,15 +13,28 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * Class containing the various functions used when responding to a call
+ * @author Simon Måtegen, Hanna Ringkvist, Sonja Peric
+ * @version 1
+ */
 public class Functions
 {
     private Storage storage;
 
+    /**
+     * @param inStorage The storage object used to store ledamoter
+     */
     public Functions(Storage inStorage)
     {
         this.storage = inStorage;
     }
 
+    /**
+     * Calls Twitters API and creates Tweet objects of the first three tweets
+     * @param name Name of the selected ledamot
+     * @return A list of maps of the tweets
+     */
     public ArrayList<Map> readTweetsFromAPI(String name)
     {
         HttpClient client = HttpClient.newHttpClient();
@@ -59,6 +72,11 @@ public class Functions
         return tweetArray;
     }
 
+    /**
+     * Creates a Tweet object from the information received by the Twitter APi
+     * @param object A Json object containing the information from twitters API
+     * @return A Tweet object
+     */
     private Tweet createTweetObject(JsonObject object)
     {
         //Texten
@@ -79,6 +97,10 @@ public class Functions
         return new Tweet(text, screenName, url, date);
     }
 
+    /**
+     * Returns a list of Ledamot objects created from the information received by the Swedish Riksdagen API
+     * @return A list of ledamots
+     */
     public ArrayList<Ledamot> readFromRiksdagenAPI()
     {
         HttpClient client = HttpClient.newHttpClient();
@@ -134,8 +156,10 @@ public class Functions
         return ledamots;
     }
 
-
-
+    /**
+     * Checks if the ledamots in storage should be uppdated. If storage is empty or it has been more then 12 hours from
+     * the last update the storage is updated.
+     */
     public void checkStorage()
     {
         if(storage.getList() == null)
@@ -158,6 +182,10 @@ public class Functions
         }
     }
 
+    /**
+     * Creates a new list of ledamots from the Swedish Riksdagen API and replaces the ledamots in storage with the new
+     * one.
+     */
     public void updateStorage()
     {
         storage.addList(readFromRiksdagenAPI());

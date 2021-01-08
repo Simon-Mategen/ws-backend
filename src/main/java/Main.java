@@ -1,24 +1,13 @@
-import org.eclipse.jetty.server.HttpConnection;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
-
 import static spark.Spark.*;
 import com.google.gson.*;
 
+/**
+ * Main class. Used to start the program. Handles all the calls to the webservice.
+ * @author Simon Måtegen, Hanna Ringkvist, Sonja Peric
+ * @version 1
+ */
 public class Main
 {
     public static void main(String[] args)
@@ -27,6 +16,7 @@ public class Main
         Storage storage = new Storage();
         Functions func = new Functions(storage);
 
+        //Necessary if this code and the website is run on the same machine. Otherwise it gets stopped by CORS.
         options("/*",
                 (request, response) -> {
 
@@ -49,6 +39,7 @@ public class Main
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
+        //Endpoint to get all of the ledamots. Gets returned as Json.
         get("/api/v1/ledamoter", ((request, response) ->
         {
             func.checkStorage();
@@ -61,6 +52,7 @@ public class Main
             return response.body();
         }));
 
+        //Endpoint to get a specific ledamot given an id. Gets returned as Json.
         get("/api/v1/ledamoter/:id", ((request, response) ->
         {
             func.checkStorage();
@@ -75,6 +67,7 @@ public class Main
             return response.body();
         }));
 
+        //Endpoint to get all of the ledamots in a specific party. Gets returned as Json.
         get("/api/v1/ledamoter/parti/:parti", ((request, response) ->
         {
             func.checkStorage();
@@ -89,6 +82,7 @@ public class Main
             return response.body();
         }));
 
+        //Endpoint to get all of the political parties currently in storage. Gets returned as Json.
         get("/api/v1/partier", ((request, response) ->
         {
             func.checkStorage();
@@ -101,6 +95,7 @@ public class Main
             return response.body();
         }));
 
+        //Endpoint to get the link to the Swedish Riksdagen website with more information about a specific ledamot. Gets returned as Json.
         get("/api/v1/link/:id", ((request, response) ->
         {
             func.checkStorage();
@@ -117,6 +112,7 @@ public class Main
             return response.body();
         }));
 
+        //Endpoint to get the three latest tweets for a given ledamot. Gets returned as Json.
         get("/api/v1/tweet/:namn", ((request, response) ->
         {
             String nameToSearch = request.params("namn");
