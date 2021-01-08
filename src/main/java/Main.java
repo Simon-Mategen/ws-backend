@@ -44,10 +44,21 @@ public class Main
         {
             func.checkStorage();
 
-            ArrayList<Map> temp = storage.getLedamoter();
+            ArrayList<Map> tempList = storage.getLedamoter();
+
+            if (tempList == null)
+            {
+                response.status(404);
+                response.body("404: No ledamots found");
+            }
+            else
+            {
+                response.type("application/json");
+                response.body(gson.toJson(tempList));
+            }
 
             response.type("application/json");
-            response.body(gson.toJson(temp));
+            response.body(gson.toJson(tempList));
 
             return response.body();
         }));
@@ -61,8 +72,16 @@ public class Main
 
             Map ledamot = storage.getLedamotMapAt(chosenID);
 
-            response.type("application/json");
-            response.body(gson.toJson(ledamot));
+            if (ledamot == null)
+            {
+                response.status(404);
+                response.body("404: No ledamot found with given id");
+            }
+            else
+            {
+                response.type("application/json");
+                response.body(gson.toJson(ledamot));
+            }
 
             return response.body();
         }));
@@ -76,8 +95,16 @@ public class Main
 
             ArrayList<Map> tempList = storage.getLedamoterByParty(chosenParty);
 
-            response.type("application/json");
-            response.body(gson.toJson(tempList));
+            if (tempList == null)
+            {
+                response.status(404);
+                response.body("404: No ledamots in the given party");
+            }
+            else
+            {
+                response.type("application/json");
+                response.body(gson.toJson(tempList));
+            }
 
             return response.body();
         }));
@@ -89,8 +116,16 @@ public class Main
 
             ArrayList<String> tempList = storage.getAvailablePartys();
 
-            response.type("application/json");
-            response.body(gson.toJson(tempList));
+            if (tempList == null)
+            {
+                response.status(404);
+                response.body("404: No parties found");
+            }
+            else
+            {
+                response.type("application/json");
+                response.body(gson.toJson(tempList));
+            }
 
             return response.body();
         }));
@@ -104,10 +139,18 @@ public class Main
 
             Ledamot tempLedamot = storage.getLedamotAt(choosenID);
 
-            String link = "https://www.riksdagen.se/sv/ledamoter-partier/ledamot/filler-text_" + tempLedamot.getSourceID();
+            if (tempLedamot == null)
+            {
+                response.status(404);
+                response.body("404: Ledamot with given id not found");
+            }
+            else
+            {
+                String link = "https://www.riksdagen.se/sv/ledamoter-partier/ledamot/filler-text_" + tempLedamot.getSourceID();
 
-            response.type("application/json");
-            response.body(gson.toJson(link));
+                response.type("application/json");
+                response.body(gson.toJson(link));
+            }
 
             return response.body();
         }));
@@ -131,9 +174,6 @@ public class Main
                 response.type("application/json");
                 response.body(gson.toJson(temp));
             }
-
-            response.type("application/json");
-            response.body(gson.toJson(temp));
 
             return response.body();
         }));
