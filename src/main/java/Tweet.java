@@ -36,9 +36,9 @@ public class Tweet
     {
         Map map = new HashMap();
         map.put("text", this.text);
-        map.put("författare", this.author);
+        map.put("author", this.author);
         map.put("url", this.url);
-        map.put("datum", this.date);
+        map.put("date", this.date);
 
         return map;
     }

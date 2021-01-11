@@ -176,6 +176,7 @@ public class Functions
             {
                 if ((LocalTime.now().until(storage.getTime(), ChronoUnit.HOURS) >= 12))
                 {
+                    System.out.println("Test");
                     updateStorage();
                 }
             }

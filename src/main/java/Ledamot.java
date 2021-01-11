@@ -39,9 +39,9 @@ public class Ledamot
     {
         Map map = new HashMap();
         map.put("id", this.id);
-        map.put("namn", this.name);
-        map.put("parti", this.party);
-        map.put("bild", this.pictureURL);
+        map.put("name", this.name);
+        map.put("party", this.party);
+        map.put("image", this.pictureURL);
 
         return map;
     }

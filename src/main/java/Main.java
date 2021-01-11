@@ -39,7 +39,7 @@ public class Main
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        //Endpoint to get all of the ledamots. Gets returned as Json.
+        //Endpoint to get all of the ledamoter. Gets returned as Json.
         get("/api/v1/ledamoter", ((request, response) ->
         {
             func.checkStorage();
@@ -87,11 +87,11 @@ public class Main
         }));
 
         //Endpoint to get all of the ledamots in a specific party. Gets returned as Json.
-        get("/api/v1/ledamoter/parti/:parti", ((request, response) ->
+        get("/api/v1/ledamoter/party/:party", ((request, response) ->
         {
             func.checkStorage();
 
-            String chosenParty = request.params("parti");
+            String chosenParty = request.params("party");
 
             ArrayList<Map> tempList = storage.getLedamoterByParty(chosenParty);
 
@@ -110,7 +110,7 @@ public class Main
         }));
 
         //Endpoint to get all of the political parties currently in storage. Gets returned as Json.
-        get("/api/v1/partier", ((request, response) ->
+        get("/api/v1/parties", ((request, response) ->
         {
             func.checkStorage();
 
@@ -156,9 +156,9 @@ public class Main
         }));
 
         //Endpoint to get the three latest tweets for a given ledamot. Gets returned as Json.
-        get("/api/v1/tweet/:namn", ((request, response) ->
+        get("/api/v1/tweet/:name", ((request, response) ->
         {
-            String nameToSearch = request.params("namn");
+            String nameToSearch = request.params("name");
 
             ArrayList<Map> temp;
 
