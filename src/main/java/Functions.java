@@ -174,7 +174,7 @@ public class Functions
             }
             else
             {
-                if ((LocalTime.now().until(storage.getTime(), ChronoUnit.HOURS) >= 24))
+                if ((LocalTime.now().until(storage.getTime(), ChronoUnit.HOURS) >= 12))
                 {
                     updateStorage();
                 }
